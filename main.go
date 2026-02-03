@@ -32,6 +32,7 @@ type Metrics struct {
 	StartTime string `json:"CORE.startTime,omitempty"`
 	NumDocs   int    `json:"SEARCHER.searcher.numDocs,omitempty"`
 	IndexSize string `json:"INDEX.size,omitempty"`
+	HeapMax   int64  `json:"memory.heap.max,omitempty"`
 }
 
 // A copy of Metrics struct but with flattened json keys.
@@ -41,6 +42,7 @@ type Info struct {
 	StartTime string `json:"Start time"`
 	NumDocs   int    `json:"Documents,string"`
 	IndexSize string `json:"Index size"`
+	HeapMax   int64  `json:"Heap max (bytes),string"`
 }
 
 func main() {
@@ -89,6 +91,10 @@ func parseSolrData(resp *http.Response) Metrics {
 	}
 	// Solr Node metrics.
 	if err := transcode(solr.Metrics["solr.node"], &metrics); err != nil {
+		log.Fatal(err)
+	}
+	// Solr JVM metrics.
+	if err := transcode(solr.Metrics["solr.jvm"], &metrics); err != nil {
 		log.Fatal(err)
 	}
 

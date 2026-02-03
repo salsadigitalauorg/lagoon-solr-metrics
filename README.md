@@ -38,6 +38,21 @@ LAGOON_INSIGHTS_ENDPOINT="http://lagoon-remote-insights-remote.lagoon.svc"
 
 The above are the defaults that the application will use, but you can override them as needed in your runtime environment.
 
+## Metrics Collected
+
+The application collects the following metrics from Solr and pushes them to Lagoon Remote Insights:
+
+- **Version**: Solr specification version
+- **Core name**: Name of the Solr core
+- **Start time**: When the Solr core was started
+- **Documents**: Number of documents indexed
+- **Index size**: Size of the Solr index
+- **Heap max (bytes)**: Maximum configured JVM heap size
+
+These metrics are sourced from:
+- `solr.core.<corename>` - Core-specific metrics
+- `solr.node` - Node-level metrics
+- `solr.jvm` - JVM metrics including heap configuration
 
 ## Local development
 
