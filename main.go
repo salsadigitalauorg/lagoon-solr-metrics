@@ -42,7 +42,7 @@ type Info struct {
 	StartTime string `json:"Start time"`
 	NumDocs   int    `json:"Documents,string"`
 	IndexSize string `json:"Index size"`
-	HeapMax   int64  `json:"Heap max (bytes),string"`
+	HeapMax   int64  `json:"Heap max,string"`
 }
 
 func main() {
